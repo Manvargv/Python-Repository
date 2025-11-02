@@ -1,0 +1,75 @@
+import random
+
+def main():
+    grades = []
+
+    # Collect grades from the user
+    while True:
+        try:
+            grade_input = input("Enter a grade (or -1 to finish): ")
+            grade = int(grade_input)
+            if grade == -1:
+                break
+            grades.append(grade)
+        except ValueError:
+            print("Please enter a valid number.")
+
+    print("\nGrades entered:", grades)
+
+    # Remove the lowest grade
+    print("\n--- Removing the lowest grade ---")
+    if grades:
+        lowest_grade = min(grades)
+        index_of_lowest = grades.index(lowest_grade)
+        grades.pop(index_of_lowest)
+        print("Lowest grade removed:", lowest_grade)
+    else:
+        print("No grades to remove.")
+    print("Grades after removal:", grades)
+
+    # Remove a random grade
+    print("\n--- Removing a random grade ---")
+    if grades:
+        random_grade = random.choice(grades)
+        grades.remove(random_grade)
+        print("Random grade removed:", random_grade)
+    else:
+        print("No grades to remove.")
+    print("Grades after random removal:", grades)
+
+    # Edit a grade
+    print("\n--- Editing a grade ---")
+    if grades:
+        for idx, grade in enumerate(grades, start=1):
+            print(f"{idx}: {grade}")
+
+        while True:
+            try:
+                choice = int(input(f"Enter the number (1-{len(grades)}) of the grade you'd like to edit: "))
+                if 1 <= choice <= len(grades):
+                    new_grade = int(input("Enter the new grade: "))
+                    grades[choice - 1] = new_grade
+                    break
+                else:
+                    print("Invalid choice. Try again.")
+            except ValueError:
+                print("Please enter a valid number.")
+    else:
+        print("No grades available to edit.")
+    print("Grades after editing:", grades)
+
+    # Sort and reverse the grades
+    print("\n--- Sorting and Reversing Grades ---")
+    grades.sort()
+    grades.reverse()
+    print("Grades after sorting and reversing:", grades)
+
+    # Get total and average
+    print("\n--- Grade Total and Average ---")
+    total = sum(grades)
+    average = total / len(grades) if grades else 0
+    print("Total of grades:", total)
+    print("Average grade:", round(average, 2))
+
+    print("\nCompleted by, Manuel Vargas")
+    
